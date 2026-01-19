@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Bot Traffic Detection Platform
 
 A complete web-based security project to detect and block bot traffic in real-time. This system monitors traffic to a demo carpenter shop website and provides a dashboard for visualization and control.
@@ -292,3 +293,6 @@ This project is for educational and hackathon purposes.
 ## 🤝 Contributing
 
 Feel free to enhance the detection algorithms, improve the UI, or add new features!
+=======
+# DDoS-Hackathon
+>>>>>>> 862a8e46ba0ab110bd8da0acf721a09c8503308c
