@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Bot Traffic Detection Platform
 
 A complete web-based security project to detect and block bot traffic in real-time. This system monitors traffic to a demo carpenter shop website and provides a dashboard for visualization and control.
@@ -6,8 +6,8 @@ A complete web-based security project to detect and block bot traffic in real-ti
 ## 🏗️ Project Structure
 
 ```
-anti/
-├── carpenter-shop/          # Demo website (protected target)
+DDoS-Hackathon/
+├── Demo_website/          # Demo website (protected target)
 │   ├── index.html
 │   └── styles.css
 ├── security-platform/       # Security monitoring system
@@ -113,7 +113,7 @@ python attack_sim.py 3  # Mixed traffic
 
 | Component | URL | Description |
 |-----------|-----|-------------|
-| **Carpenter Shop** | http://localhost:5000/ | Demo website being protected |
+| **Demo Website** | http://localhost:5000/ | Demo website being protected |
 | **Security Dashboard** | http://localhost:5173/ | Real-time monitoring dashboard |
 | **Backend API** | http://localhost:5000/api/stats | API endpoints |
 
@@ -122,8 +122,8 @@ python attack_sim.py 3  # Mixed traffic
 ### 1. Monitor Normal Traffic
 
 1. Open the **Security Dashboard** at http://localhost:5173/
-2. Open the **Carpenter Shop** at http://localhost:5000/ in another tab
-3. Browse the carpenter shop normally
+2. Open the **Demo Website** at http://localhost:5000/ in another tab
+3. Browse the Demo Website normally
 4. Watch the dashboard update with traffic logs
 
 ### 2. Simulate Bot Attacks
@@ -290,9 +290,5 @@ Unblock an IP address
 
 This project is for educational and hackathon purposes.
 
-## 🤝 Contributing
-
-Feel free to enhance the detection algorithms, improve the UI, or add new features!
-=======
 # DDoS-Hackathon
 >>>>>>> 862a8e46ba0ab110bd8da0acf721a09c8503308c
