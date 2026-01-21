@@ -1,7 +1,7 @@
 
 # Bot Traffic Detection Platform
 
-A complete web-based security project to detect and block bot traffic in real-time. This system monitors traffic to a demo carpenter shop website and provides a dashboard for visualization and control.
+A complete web-based security project to detect and block bot traffic in real-time. This system monitors traffic to a demo website and provides a dashboard for visualization and control.
 
 ## 🏗️ Project Structure
 
