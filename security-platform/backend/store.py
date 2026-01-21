@@ -1,23 +1,33 @@
 import time
 from collections import defaultdict, deque
+from geo_utils import get_ip_geo
 
 # In-memory storage using simple global variables
 # In a real app, this would be Redis/Database
 
-# Traffic Logs: list of {timestamp, ip, path, method, user_agent, status, threat_level}
-traffic_logs = deque(maxlen=1000)
+# Traffic Logs: list of {timestamp, ip, path, method, user_agent, status, threat_level, geo}
+traffic_logs = deque(maxlen=2000)
 
 # Blocked IPs: set of IPs that are blocked
 blocked_ips = set()
 
 # IP Stats: tracking request counts for rate limiting
-# {ip: {count: int, start_time: float, last_seen: float, timestamps: deque, paths: set}}
+# {ip: {
+#   count: int, 
+#   start_time: float, 
+#   last_seen: float, 
+#   timestamps: deque, 
+#   paths: set,
+#   geo: dict
+# }}
 ip_stats = defaultdict(lambda: {
     'count': 0, 
     'start_time': time.time(), 
     'last_seen': time.time(),
-    'timestamps': deque(maxlen=20), # Keep last 20 timestamps for time diff calc
-    'paths': set() # unique paths visited
+    # Increased maxlen for better spike detection history (last 100 reqs)
+    'timestamps': deque(maxlen=100), 
+    'paths': set(), # unique paths visited
+    'geo': None
 })
 
 # Bot Detections: list of {ip, reason, timestamp}
@@ -62,6 +72,9 @@ def record_request(ip, path='/'):
         stats['count'] = 0
         stats['start_time'] = now
     
+    if stats['geo'] is None:
+        stats['geo'] = get_ip_geo(ip)
+
     stats['count'] += 1
     stats['last_seen'] = now
     stats['timestamps'].append(now)

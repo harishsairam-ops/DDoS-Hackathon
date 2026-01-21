@@ -42,9 +42,10 @@ def security_middleware():
     verdict, reason, ml_score = analyze_request(client_ip, headers)
     
     # 4. Check Rate Limit
-    if check_rate_limit(client_ip, req_count):
+    rate_limited, limit_reason = check_rate_limit(client_ip, req_count)
+    if rate_limited:
         verdict = 'SUSPICIOUS'
-        reason = f'Rate Limit Exceeded ({req_count} req/min)'
+        reason = limit_reason
         ml_score = max(ml_score, 0.9) # High confidence if rate limiting triggers
         # Auto-block on rate limit for demo effect
         block_ip(client_ip, reason)
@@ -68,16 +69,23 @@ def security_middleware():
     if ml_score > 0.8:
         threat_level = 'HIGH'
 
+    # Determine final status
+    final_status = 200
+    if is_blocked(client_ip):
+        final_status = 403
+
     # Log the request
+    from store import ip_stats # ensure we have access
     add_log({
         'timestamp': time.time(),
         'ip': client_ip,
         'path': request.path,
         'method': request.method,
         'user_agent': headers.get('User-Agent', 'Unknown'),
-        'status': 200, # Will be 200 if we don't abort
+        'status': final_status, 
         'threat_level': threat_level,
-        'ml_score': ml_score
+        'ml_score': ml_score,
+        'geo': ip_stats[client_ip].get('geo')
     })
     
     if is_blocked(client_ip):

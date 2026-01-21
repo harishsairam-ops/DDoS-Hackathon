@@ -124,14 +124,14 @@ function Dashboard() {
                     </div>
 
                     {/* Content Split: Map & Table */}
-                    <div className="flex-1 grid grid-cols-1 gap-4 overflow-hidden relative" style={{ gridTemplateRows: '1fr 1fr' }}>
+                    <div className="flex-1 grid grid-cols-1 gap-4 overflow-hidden relative min-h-0" style={{ gridTemplateRows: '1fr 1fr' }}>
                         {/* Global Map Panel */}
-                        <div className="glass-panel relative overflow-hidden group border-t-2 border-cyan-500">
-                            <GlobalMap />
+                        <div className="relative overflow-hidden group border-t-2 border-cyan-500 min-h-0">
+                            <GlobalMap logs={stats.logs} />
                         </div>
 
                         {/* Traffic Table Panel */}
-                        <div className="glass-panel relative overflow-hidden border-b-2 border-cyan-500">
+                        <div className="relative overflow-hidden border-b-2 border-cyan-500 min-h-0">
                             <TrafficTable logs={stats.logs} />
                         </div>
                     </div>
